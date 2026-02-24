@@ -151,3 +151,31 @@
 .back-link:hover {
   opacity: 0.8;
 }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .waitlist-page {
+    padding: 24px 20px;
+  }
+  .waitlist-heading {
+    font-size: 26px;
+  }
+  .waitlist-form {
+    flex-direction: column;
+  }
+  .waitlist-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .waitlist-page {
+    padding: 20px 16px;
+  }
+  .waitlist-heading {
+    font-size: 22px;
+  }
+  .waitlist-sub {
+    font-size: 13px;
+  }
+}
