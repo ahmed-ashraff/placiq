@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placiq</title>
+    <link rel="icon" type="image/svg+xml" href="assets/onBlackLogo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Custom cursor — DISABLED
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    -->
+
+    <!-- NAV -->
+    <nav id="nav">
+      <div class="logo">
+        <img src="assets/onBlackLogo.svg" alt="Placiq Logo" class="logo-icon" />
+        <span class="q">Placi</span><span class="m">Q</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <!-- HIDDEN: NOT YET LAUNCHED — Comparison, Pricing, Leaderboard nav links
+    <li><a href="#compare">vs Others</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#leaderboard">Leaderboards</a></li>
+    -->
+      </ul>
+      <div class="nav-cta">
+        <a href="waitlist.html" class="btn-ghost">Sign in</a>
+        <a href="waitlist.html" class="btn-primary">Join the waitlist</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-glow2"></div>
+
+      <div class="badge">
+        <div class="badge-dot"></div>
+        Now in Beta — Join the waitlist
+      </div>
+
+      <h1>
+        Master
+        <span class="line2">Database</span>
+        <span class="line3">Internals.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Assess engineers beyond query
+        <span class="correction-wrapper"
+          ><span class="strikethrough">correctness</span>
+          <span class="correction-text">performance</span></span
+        >
+        SQL. Practice database internals like you practice algorithms and data
+        structures.
+      </p>
+
+      <div class="hero-actions">
+        <a href="waitlist.html" class="btn-primary btn-lg"
+          >Join the waitlist →</a
+        >
+        <a href="#how" class="btn-ghost btn-lg">Learn how it works</a>
+      </div>
+
+      <!-- HIDDEN: NOT YET LAUNCHED — Stats metrics (fake social proof)
+  <div class="hero-metrics">
+    <div class="metric">
+      <div class="metric-num">2.3<span>k+</span></div>
+      <div class="metric-label">Engineers practicing</div>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="metric">
+      <div class="metric-num">500<span>+</span></div>
+      <div class="metric-label">Performance problems</div>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="metric">
+      <div class="metric-num">10<span>M</span></div>
+      <div class="metric-label">Max dataset rows</div>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="metric">
+      <div class="metric-num">3</div>
+      <div class="metric-label">DB engines supported</div>
+    </div>
+  </div>
+  -->
+
+      <!-- EDITOR PREVIEW -->
+      <div class="editor-preview">
+        <div class="editor-frame">
+          <div class="editor-topbar">
+            <div class="dot-row">
+              <div class="dot r"></div>
+              <div class="dot y"></div>
+              <div class="dot g"></div>
+            </div>
+            <div class="editor-tabs">
+              <div class="etab active">query.sql</div>
+              <div class="etab">plan.json</div>
+              <div class="etab">flame.svg</div>
+            </div>
+          </div>
+          <div class="editor-body">
+            <div class="code-area">
+              <pre><span class="ln">1 </span><span class="cm">-- Problem: Top customers by order value (5M rows)</span>
+<span class="ln">2 </span><span class="cm">-- Baseline: 842ms | Target: &lt;80ms | Your score: 94</span>
+<span class="ln">3 </span>
+<span class="ln">4 </span><span class="kw">EXPLAIN ANALYZE</span>
+<span class="hl"><span class="ln">5 </span><span class="kw">SELECT</span> c.customer_id, c.name,</span>
+<span class="hl"><span class="ln">6 </span>       <span class="fn">SUM</span>(o.total_amount) <span class="kw">AS</span> total_spent,</span>
+<span class="hl"><span class="ln">7 </span>       <span class="fn">COUNT</span>(o.order_id) <span class="kw">AS</span> order_count</span>
+<span class="ln">8 </span><span class="kw">FROM</span> customers c
+<span class="ln">9 </span><span class="kw">JOIN</span> orders o <span class="kw">ON</span> c.customer_id = o.customer_id
+<span class="ln">10</span><span class="kw">WHERE</span> o.created_at &gt;= <span class="str">'2024-01-01'</span>
+<span class="ln">11</span>  <span class="kw">AND</span> o.status = <span class="str">'completed'</span>
+<span class="ln">12</span><span class="kw">GROUP BY</span> c.customer_id, c.name
+<span class="ln">13</span><span class="kw">ORDER BY</span> total_spent <span class="kw">DESC</span>
+<span class="ln">14</span><span class="kw">LIMIT</span> 100;
+</pre>
+            </div>
+
+            <!-- HIDDEN: NOT YET LAUNCHED — Performance Score visual details
+        <div class="results-panel">
+          <div class="panel-section">
+            <div class="panel-label">Performance Score</div>
+            <div class="score-big">94</div>
+            <div class="score-sub">exec: 47ms · baseline: 842ms · +18× faster</div>
+          </div>
+          <div class="panel-section">
+            <div class="panel-label">Breakdown</div>
+            <div class="perf-bars">
+              <div class="perf-row">
+                <div class="perf-name">Exec Time</div>
+                <div class="perf-track"><div class="perf-fill green" style="width:94%"></div></div>
+                <div class="perf-val" style="color:var(--green)">47ms</div>
+              </div>
+              <div class="perf-row">
+                <div class="perf-name">I/O Cost</div>
+                <div class="perf-track"><div class="perf-fill cyan" style="width:88%"></div></div>
+                <div class="perf-val">88/100</div>
+              </div>
+              <div class="perf-row">
+                <div class="perf-name">Plan Score</div>
+                <div class="perf-track"><div class="perf-fill amber" style="width:97%"></div></div>
+                <div class="perf-val" style="color:var(--accent3)">97/100</div>
+              </div>
+            </div>
+          </div>
+          <div class="flame-mini">
+            <div class="flame-label">Flame Graph</div>
+            <svg class="flame-svg" height="80" viewBox="0 0 340 80">
+              <rect class="fbar" x="0" y="0" width="340" height="22" rx="3" fill="rgba(0,229,255,0.7)"/>
+              <text x="8" y="15" font-family="JetBrains Mono" font-size="10" fill="rgba(0,0,0,0.8)">Aggregate  (42.1ms)</text>
+              <rect class="fbar" x="0" y="26" width="220" height="22" rx="3" fill="rgba(0,229,255,0.55)"/>
+              <text x="8" y="41" font-family="JetBrains Mono" font-size="10" fill="rgba(0,0,0,0.8)">Hash Join (38.2ms)</text>
+              <rect class="fbar" x="224" y="26" width="116" height="22" rx="3" fill="rgba(124,58,237,0.7)"/>
+              <text x="230" y="41" font-family="JetBrains Mono" font-size="10" fill="rgba(255,255,255,0.9)">Sort</text>
+              <rect class="fbar" x="0" y="52" width="140" height="22" rx="3" fill="rgba(16,185,129,0.7)"/>
+              <text x="8" y="67" font-family="JetBrains Mono" font-size="10" fill="rgba(0,0,0,0.8)">Index Scan (3.1ms)</text>
+              <rect class="fbar" x="144" y="52" width="76" height="22" rx="3" fill="rgba(16,185,129,0.55)"/>
+              <text x="150" y="67" font-family="JetBrains Mono" font-size="10" fill="rgba(0,0,0,0.8)">Seq Scan</text>
+            </svg>
+          </div>
+          <div class="ai-chip">
+            <div class="ai-chip-label">🤖 AI Coach</div>
+            Good use of index on customer_id! Consider a partial index on orders where status='completed' to cut Seq Scan by ~60%. Add INCLUDE(total_amount) to avoid heap fetch.
+          </div>
+        </div>
+        -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="ticker">
+      <div class="ticker-inner">
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          EXPLAIN ANALYZE</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Flame Graphs</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          AI Coach</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Real Execution Scoring</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          10M Row Datasets</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Index Tuning</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Query Optimization</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          PostgreSQL → MySQL → MongoDB</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          B2B Team Workspaces</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          EXPLAIN ANALYZE</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Flame Graphs</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          AI Coach</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Real Execution Scoring</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          10M Row Datasets</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Index Tuning</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          Query Optimization</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          PostgreSQL → MySQL → MongoDB</span
+        >
+        <span class="ticker-item"
+          ><div class="ticker-dot"></div>
+          B2B Team Workspaces</span
+        >
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="section-label">Why Placiq</div>
+      <div class="section-title">SQL practice stops at correctness.</div>
+      <p class="section-sub">
+        Most platforms check if your query is correct. We check if it's fast.
+      </p>
+
+      <div class="features-grid scroll-reveal">
+        <div class="feat-card">
+          <!-- <div class="feat-icon cyan"> </div> -->
+          <br /><br />
+          <div class="feat-title">Real Execution Scoring</div>
+          <br />
+          <p class="feat-desc">
+            Get scored on actual execution time, I/O cost, and plan quality —
+            not just whether your result set matches. Run against 1M–10M row
+            datasets that actually stress your query.
+          </p>
+        </div>
+        <div class="feat-card">
+          <!-- <div class="feat-icon amber"> </div> -->
+          <br /><br />
+          <div class="feat-title">Visual Flame Graphs</div>
+          <br />
+          <p class="feat-desc">
+            Interactive pg_flame-style SVG graphs of your execution plan. Click
+            any node to drill into cost, rows, and time. Instantly see where
+            your query bleeds time.
+          </p>
+        </div>
+        <!-- <div class="feat-card">
+          <div class="feat-icon purple">🤖</div>
+          <div class="feat-title">AI Coach (LLM-Powered)</div>
+          <p class="feat-desc">
+            Your EXPLAIN ANALYZE output goes to an AI trained on DB performance.
+            Get 3 concrete optimization suggestions with rewritten query
+            examples. Every single run.
+          </p>
+        </div> -->
+        <div class="feat-card">
+          <!-- <div class="feat-icon green"> </div> -->
+          <br /><br />
+          <div class="feat-title">Leaderboards & Competitions</div>
+          <br />
+          <p class="feat-desc">
+            Compete globally or with friends. Earn badges like "Index God" and
+            "Flame Master". Track streaks, skill heatmaps, and progress toward
+            "DB Black Belt".
+          </p>
+        </div>
+        <!-- <div class="feat-card">
+          <div class="feat-icon cyan">🏢</div>
+          <div class="feat-title">B2B Private Workspaces</div>
+          <p class="feat-desc">
+            Create team workspaces with private problem banks, company
+            leaderboards, and individual analytics. Upload your own schemas for
+            custom challenges.
+          </p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon amber">🗄️</div>
+          <div class="feat-title">Multi-DB Engine Support</div>
+          <p class="feat-desc">
+            Start with PostgreSQL (full EXPLAIN ANALYZE support). MySQL and
+            MongoDB added in Phase 2. Problems tagged by engine — learn what
+            actually differs.
+          </p>
+        </div> -->
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="section-label">Workflow</div>
+      <div class="section-title">Practice, Analyze, Optimize.</div>
+
+      <div class="how-grid scroll-reveal">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <div class="step-title">Pick a problem</div>
+              <div class="step-desc">
+                Browse by difficulty (Easy → Black Belt), tag (indexing, joins,
+                partitioning, window functions, NoSQL aggregation), or DB
+                engine. Real-world inspired problems with full schema context.
+              </div>
+              <div class="step-tag">500+ problems</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <div class="step-title">Write your query</div>
+              <div class="step-desc">
+                SQL editor with syntax highlighting. Run against a real
+                PostgreSQL sandbox pre-loaded with 1M–10M row datasets.
+              </div>
+              <div class="step-tag">Real Postgres sandbox</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <div class="step-title">See EXPLAIN + Flame Graph</div>
+              <div class="step-desc">
+                Instantly get EXPLAIN ANALYZE output rendered as an interactive
+                flame graph and tree. Click any node for cost, buffers, rows.
+                See exactly what your DB is doing.
+              </div>
+              <div class="step-tag">Interactive visualization</div>
+            </div>
+          </div>
+          <!-- <div class="step">
+            <div class="step-num">04</div>
+            <div class="step-content">
+              <div class="step-title">AI Coach analyzes your plan</div>
+              <div class="step-desc">
+                Your full plan JSON goes to an LLM that acts as a senior DBA.
+                Get 3 concrete, specific improvements — with example SQL — every
+                time. Not generic tips. Actual fixes for your query.
+              </div>
+              <div class="step-tag">Powered by Claude/GPT-4</div>
+            </div>
+          </div> -->
+          <div class="step">
+            <div class="step-num">04</div>
+            <div class="step-content">
+              <div class="step-title">Optimize & Submit</div>
+              <div class="step-desc">
+                Reduce cost, improve execution time, and optimize I/O
+                efficiency.
+              </div>
+              <div class="step-tag">Optimization</div>
+            </div>
+          </div>
+        </div>
+        <div class="how-visual">
+          <div class="explain-header">
+            <span>EXPLAIN ANALYZE · Interactive Tree</span>
+            <span style="color: var(--green)">✓ Index used</span>
+          </div>
+          <div class="explain-node root">
+            <div class="en-name">→ Limit (rows: 100)</div>
+            <div class="en-cost">Total cost: 4821.23 · actual time: 47.3ms</div>
+            <div class="en-tag">✓ Plan looks healthy</div>
+          </div>
+          <div class="en-children">
+            <div class="explain-node">
+              <div class="en-name">→ Sort (total_spent DESC)</div>
+              <div class="en-cost">cost: 4821.23 · actual: 44.1ms</div>
+              <div class="en-rows">rows: 84,219 · loops: 1</div>
+            </div>
+            <div class="en-children">
+              <div class="explain-node">
+                <div class="en-name">→ HashAggregate</div>
+                <div class="en-cost">cost: 3108.92 · actual: 38.7ms</div>
+                <div class="en-rows">rows: 84,219 · Peak mem: 4MB</div>
+              </div>
+              <div class="en-children">
+                <div class="explain-node">
+                  <div class="en-name">→ Hash Join (customers × orders)</div>
+                  <div class="en-cost">cost: 1822.44 · actual: 31.2ms</div>
+                  <div class="en-rows">Hash Batches: 1 · Buckets: 65536</div>
+                  <div class="en-tag">✓ Hash fits in memory</div>
+                </div>
+                <div class="en-children">
+                  <div class="explain-node">
+                    <div class="en-name">→ Index Scan on orders</div>
+                    <div class="en-cost">cost: 0.56..892.1 · actual: 3.1ms</div>
+                    <div class="en-rows">
+                      rows: 521,043 using idx_orders_created
+                    </div>
+                    <div class="en-tag">✓ Index: idx_orders_created</div>
+                  </div>
+                  <div class="explain-node">
+                    <div class="en-name">→ Seq Scan on customers</div>
+                    <div class="en-cost">cost: 0..411.8 · actual: 2.4ms</div>
+                    <div class="en-rows">rows: 10,000 · Filter: none</div>
+                    <div class="en-tag warn">⚠ Consider covering index</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIDDEN: NOT YET LAUNCHED — Community / Leaderboard section
+<hr class="section-divider">
+
+<section id="leaderboard">
+  <div class="section-label">Community</div>
+  <div class="section-title">Compete. Get obsessed. Get hired.</div>
+  <p class="section-sub">Real rankings based on performance scores, not just solve counts. Employers can see your actual optimization skills.</p>
+
+  <div class="lb-preview scroll-reveal">
+    <div class="lb-header">
+      <div class="lb-title">Global Leaderboard</div>
+      <div class="lb-tabs">
+        <div class="lb-tab active">All Time</div>
+        <div class="lb-tab">This Week</div>
+        <div class="lb-tab">Friends</div>
+      </div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank gold">#1</div>
+      <div class="lb-user">
+        <div class="avatar av1">A</div>
+        <div>
+          <div class="lb-name">amod_queries</div>
+          <div class="lb-badge-sm">Index God</div>
+        </div>
+      </div>
+      <div class="lb-score g" style="color:var(--accent3)">9,847</div>
+      <div class="lb-stat">312 solved</div>
+      <div class="lb-stat">avg 91/100</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank silver">#2</div>
+      <div class="lb-user">
+        <div class="avatar av2">S</div>
+        <div>
+          <div class="lb-name">sql_sorcerer</div>
+          <div class="lb-badge-sm">Flame Master</div>
+        </div>
+      </div>
+      <div class="lb-score" style="color:var(--muted2)">9,421</div>
+      <div class="lb-stat">287 solved</div>
+      <div class="lb-stat">avg 89/100</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank bronze">#3</div>
+      <div class="lb-user">
+        <div class="avatar av3">K</div>
+        <div>
+          <div class="lb-name">k8s_dk_dba</div>
+          <div class="lb-badge-sm">Partition Pro</div>
+        </div>
+      </div>
+      <div class="lb-score" style="color:var(--muted2)">8,992</div>
+      <div class="lb-stat">251 solved</div>
+      <div class="lb-stat">avg 87/100</div>
+    </div>
+    <div class="lb-row" style="background:rgba(0,229,255,0.03)">
+      <div class="lb-rank" style="color:var(--accent)">#127</div>
+      <div class="lb-user">
+        <div class="avatar av4">Y</div>
+        <div>
+          <div class="lb-name">you →</div>
+          <div class="lb-badge-sm" style="color:var(--accent3); border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.1)">Climbing</div>
+        </div>
+      </div>
+      <div class="lb-score" style="color:var(--accent)">4,218</div>
+      <div class="lb-stat">94 solved</div>
+      <div class="lb-stat">avg 78/100</div>
+    </div>
+  </div>
+</section>
+-->
+
+    <!-- HIDDEN: NOT YET LAUNCHED — Comparison section
+<hr class="section-divider">
+
+<section id="compare">
+  <div class="section-label">Comparison</div>
+  <div class="section-title">Nobody else does what we do.</div>
+  <p class="section-sub">Other platforms grade on correctness. We grade on production performance. That's the difference between passing an interview and surviving oncall.</p>
+
+  <div class="compare-table scroll-reveal">
+    <div class="ct-header">
+      <div class="ct-cell head">Feature</div>
+      <div class="ct-cell head">LeetCode SQL</div>
+      <div class="ct-cell head">StrataScratch</div>
+      <div class="ct-cell head us">Placiq ⚡</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">Real execution time scoring</div>
+      <div class="ct-cell"><span class="cross">✕</span> Pass/fail only</div>
+      <div class="ct-cell"><span class="cross">✕</span> Correctness only</div>
+      <div class="ct-cell us"><span class="check">✓</span> ms + I/O + plan score</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">Visual execution plans</div>
+      <div class="ct-cell"><span class="cross">✕</span> None</div>
+      <div class="ct-cell"><span class="cross">✕</span> None</div>
+      <div class="ct-cell us"><span class="check">✓</span> Flame graph + tree</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">AI Coach (analyzes your EXPLAIN)</div>
+      <div class="ct-cell"><span class="cross">✕</span> Static hints</div>
+      <div class="ct-cell"><span class="cross">✕</span> None</div>
+      <div class="ct-cell us"><span class="check">✓</span> LLM on every run</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">Large datasets (1M+ rows)</div>
+      <div class="ct-cell"><span class="partial">◐</span> Small–medium</div>
+      <div class="ct-cell"><span class="partial">◐</span> Real-company sized</div>
+      <div class="ct-cell us"><span class="check">✓</span> 1M–10M rows</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">Indexing & tuning problems</div>
+      <div class="ct-cell"><span class="partial">◐</span> Very limited</div>
+      <div class="ct-cell"><span class="partial">◐</span> Limited</div>
+      <div class="ct-cell us"><span class="check">✓</span> Core focus</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">B2B private workspaces</div>
+      <div class="ct-cell"><span class="cross">✕</span> Separate hiring tool</div>
+      <div class="ct-cell"><span class="partial">◐</span> Limited team</div>
+      <div class="ct-cell us"><span class="check">✓</span> Full private + analytics</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell">Price (individual Pro)</div>
+      <div class="ct-cell">$35/mo</div>
+      <div class="ct-cell">$29/mo</div>
+      <div class="ct-cell us" style="color:var(--green)">$15/mo</div>
+    </div>
+  </div>
+</section>
+-->
+
+    <!-- HIDDEN: NOT YET LAUNCHED — Community love / Testimonials section
+<hr class="section-divider">
+
+<section id="social">
+  <div class="section-label">Community love</div>
+  <div class="section-title">From engineers who've been there.</div>
+
+  <div class="testimonials scroll-reveal">
+    <div class="testi">
+      <div class="testi-text">"Finally a platform that cares about production performance, not just interview tricks. The flame graphs actually taught me what EXPLAIN ANALYZE was trying to say."</div>
+      <div class="testi-author">
+        <div class="avatar av1">M</div>
+        <div>
+          <div class="author-name">Maria K.</div>
+          <div class="author-role">Senior DE @ Stripe</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">"I went from writing 800ms queries to 40ms queries after 2 weeks of Placiq. The AI coach caught an index I would never have noticed on my own."</div>
+      <div class="testi-author">
+        <div class="avatar av2">J</div>
+        <div>
+          <div class="author-name">James T.</div>
+          <div class="author-role">Backend Eng @ Datadog</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">"Set up a team workspace for our data team's onboarding. The ability to upload our own schema and create private challenges is worth every penny of the team plan."</div>
+      <div class="testi-author">
+        <div class="avatar av3">R</div>
+        <div>
+          <div class="author-name">Riya S.</div>
+          <div class="author-role">Data Lead @ Uber</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">"I've tried every SQL platform. None of them made me understand joins the way seeing the hash join cost in a flame graph did. This is the missing piece."</div>
+      <div class="testi-author">
+        <div class="avatar av4">D</div>
+        <div>
+          <div class="author-name">Dmitri V.</div>
+          <div class="author-role">DBA @ Postgres Core</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">"Used it before my system design round and actually talked intelligently about query plans. Got the job. The AI explanations were way better than Stack Overflow."</div>
+      <div class="testi-author">
+        <div class="avatar av5">A</div>
+        <div>
+          <div class="author-name">Amara N.</div>
+          <div class="author-role">SWE (new hire) @ Meta</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">"We run monthly internal SQL performance contests with Placiq. Team engagement went through the roof — people are now proactively thinking about query optimization."</div>
+      <div class="testi-author">
+        <div class="avatar av6">T</div>
+        <div>
+          <div class="author-name">Tom L.</div>
+          <div class="author-role">VP Engineering @ Figma</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+    <!-- HIDDEN: NOT YET LAUNCHED — Pricing section
+<hr class="section-divider">
+
+<section id="pricing">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Level up. Pay only when you're obsessed.</div>
+  <p class="section-sub">Start free with 30 real performance problems. Go Pro when you're hooked. Annual plan saves 20%.</p>
+
+  <div class="pricing-grid scroll-reveal">
+    <div class="price-card">
+      <div class="price-tier">Free</div>
+      <div class="price-amount"><span class="free">$0</span></div>
+      <div class="price-period">forever</div>
+      <div class="price-features">
+        <div class="pf"><div class="icon">✓</div>30 performance problems</div>
+        <div class="pf"><div class="icon">✓</div>PostgreSQL sandbox</div>
+        <div class="pf"><div class="icon">✓</div>Flame graph + tree view</div>
+        <div class="pf"><div class="icon">✓</div>Global leaderboards</div>
+        <div class="pf"><div class="icon">✓</div>AI Coach: 5 hints/day</div>
+        <div class="pf"><div class="icon x">—</div>MySQL / MongoDB problems</div>
+        <div class="pf"><div class="icon x">—</div>Private workspaces</div>
+      </div>
+      <button class="btn-ghost" style="width:100%; padding:14px">Start free →</button>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">MOST POPULAR</div>
+      <div class="price-tier">Pro</div>
+      <div class="price-amount"><sup>$</sup>15</div>
+      <div class="price-period">per month · billed annually</div>
+      <div class="price-features">
+        <div class="pf"><div class="icon">✓</div>Unlimited problems</div>
+        <div class="pf"><div class="icon">✓</div>PostgreSQL + MySQL + MongoDB</div>
+        <div class="pf"><div class="icon">✓</div>Unlimited AI Coach hints</div>
+        <div class="pf"><div class="icon">✓</div>Global + friends leaderboards</div>
+        <div class="pf"><div class="icon">✓</div>Flame graph PDF export</div>
+        <div class="pf"><div class="icon">✓</div>Performance certificate</div>
+        <div class="pf"><div class="icon x">—</div>Private team workspace</div>
+      </div>
+      <button class="btn-primary" style="width:100%; padding:14px">Go Pro — $15/mo →</button>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Team</div>
+      <div class="price-amount"><sup>$</sup>49</div>
+      <div class="price-period">per seat/month · min 5 seats</div>
+      <div class="price-features">
+        <div class="pf"><div class="icon">✓</div>Everything in Pro</div>
+        <div class="pf"><div class="icon">✓</div>Private team workspace</div>
+        <div class="pf"><div class="icon">✓</div>Upload your own schemas</div>
+        <div class="pf"><div class="icon">✓</div>Private problem bank</div>
+        <div class="pf"><div class="icon">✓</div>Team leaderboard</div>
+        <div class="pf"><div class="icon">✓</div>Individual analytics dashboard</div>
+        <div class="pf"><div class="icon">✓</div>Custom AI Coach prompts</div>
+      </div>
+      <button class="btn-ghost" style="width:100%; padding:14px">Talk to Sales →</button>
+    </div>
+  </div>
+</section>
+-->
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <div class="cta-title">Start thinking like an optimizer.</div>
+        <p class="cta-sub">
+          Join engineers who are learning what really happens inside their
+          database — and getting measurably faster every week.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center">
+          <a href="waitlist.html" class="btn-primary btn-lg"
+            >Join the waitlist →</a
+          >
+          <!-- <button class="btn-ghost btn-lg">Contact us</button> -->
+        </div>
+        <p
+          style="
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 24px;
+          "
+        >
+          <!-- No credit card · 30 free problems · Real Postgres sandbox -->
+          Already have questions?
+          <a
+            href="https://www.linkedin.com/company/Placiq"
+            style="color: #a78bfa"
+            >Chat with us on LinkedIn</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-col">
+        <div class="footer-logo">
+          <!-- <span class="q">Query</span><span class="m">Mind</span> -->
+          <img
+            src="assets/onBlackLogo.svg"
+            alt="Placiq Logo"
+            class="logo-icon"
+          />  
+          <span class="q">Placi</span><span class="m">Q</span>
+        </div>
+        <div class="footer-tagline">
+          Practice database internals like you practice algorithms & data
+          structures.
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">Platform</div>
+        <div class="footer-links">
+          <a href="#">Problems</a>
+          <a href="#">Leaderboards</a>
+          <a href="#">AI Coach</a>
+          <a href="#">Pricing</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">Product</div>
+        <div class="footer-links">
+          <a href="#">Features</a>
+          <a href="#">AI Coach</a>
+          <a href="#">Changelog</a>
+          <a href="#">Docs</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">LinkedIn</a>
+          <!-- <a href="#">Twitter / X</a> -->
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2026 Placiq. Built for engineers who care about production.
+      </div>
+      <div class="engine-badges">
+        <div class="engine-badge">PostgreSQL</div>
+        <div class="engine-badge">MySQL (soon)</div>
+        <!-- <div class="engine-badge">MongoDB (soon)</div> -->
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
