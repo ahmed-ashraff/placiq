@@ -7,13 +7,23 @@ window.addEventListener("scroll", () => {
 // Mobile nav toggle
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.querySelector(".nav-links");
-const navCta = document.querySelector(".nav-cta");
+const navCta = document.querySelector(".nav-cta") as HTMLElement | null;
 
 if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-        navToggle.classList.toggle("open");
-        navLinks.classList.toggle("open");
-        navCta?.classList.toggle("open");
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.classList.toggle("open", isOpen);
+
+        // Move CTA into / out of the drawer
+        if (navCta) {
+            if (isOpen) {
+                navLinks.appendChild(navCta);
+                navCta.classList.add("open");
+            } else {
+                navToggle.parentElement?.appendChild(navCta);
+                navCta.classList.remove("open");
+            }
+        }
     });
 
     // Close menu when a link is clicked
@@ -21,10 +31,29 @@ if (navToggle && navLinks) {
         link.addEventListener("click", () => {
             navToggle.classList.remove("open");
             navLinks.classList.remove("open");
-            navCta?.classList.remove("open");
+            if (navCta) {
+                navToggle.parentElement?.appendChild(navCta);
+                navCta.classList.remove("open");
+            }
         });
     });
 }
+
+// Reset mobile nav when resizing to desktop
+function closeMobileNav(): void {
+    if (navToggle && navLinks && navCta) {
+        navToggle.classList.remove("open");
+        navLinks.classList.remove("open");
+        navCta.classList.remove("open");
+        // Move CTA back to nav (outside nav-links)
+        nav.appendChild(navCta);
+    }
+}
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 1024) {
+        closeMobileNav();
+    }
+});
 
 // Scroll reveal
 const observer = new IntersectionObserver(
