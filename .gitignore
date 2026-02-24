@@ -3,12 +3,17 @@
 .env.local
 .env.*
 
-# Config files with secrets
+# Config files with secrets (legacy)
 js/config.js
 
 # Dependencies
 node_modules/
 jspm_packages/
+
+# Build output
+dist/
+dist-ssr/
+*.local
 
 # IDE files
 .vscode/
@@ -19,3 +24,6 @@ jspm_packages/
 # OS files
 .DS_Store
 Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
